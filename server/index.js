@@ -6,7 +6,15 @@ const bluebird = require('bluebird');
 const cors = require('cors');
 
 mongoose.Promise = bluebird;
-mongoose.connect('mongodb://127.0.0.1:27017/chat', {}).then(() => {
+mongoose.connect('mongodb://paperplane-db:27017/chat', {
+    server: {
+        auto_reconnect: true,
+        useMongoClient: true,
+        keepAlive: 30000,
+        reconnectInterval: 10000,
+        reconnectTries: 10000
+    }
+}).then(() => {
     console.log(`Succesfully Connected to the Mongodb Database!`);
 }).catch(() => {
     console.log(`Error Connecting to the Mongodb Database!`);

@@ -1,0 +1,19 @@
+version: "2"
+services:
+  paperplane-server:
+    container_name: paperplane-server
+    image: adipop/paperplane-server
+    restart: always
+    build: .
+    ports: 
+      - "8888:8888"
+    links:
+      - paperplane-db
+  paperplane-db:
+    container_name: paperplane-db
+    image: mongo
+    expose: 27017
+  paperplane-client:
+    image: adipop/paperplane-client
+    ports:
+      - "80:8000"
