@@ -84,6 +84,14 @@
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 15px;
     padding: 5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.newsfeed-window img {
+    height: 40%;
 }
 
 .curr-conv-info-container {
