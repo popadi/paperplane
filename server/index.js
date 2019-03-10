@@ -6,7 +6,7 @@ const bluebird = require('bluebird');
 const cors = require('cors');
 
 mongoose.Promise = bluebird;
-mongoose.connect('mongodb://paperplane-db:27017/chat', {
+mongoose.connect('mongodb://mongodb:27017/chat', {
     server: {
         auto_reconnect: true,
         useMongoClient: true,
