@@ -1,0 +1,51 @@
+<div class="modal-header" align="center">
+    <div align="center" style="width: 100%">
+        Info about {{ clickedFriend.username }}
+    </div>
+</div>
+
+<div class="modal-body" align="center">
+    <div align="center">
+        <img ng-src="{{ clickedFriend.avatar }}" class="avatar-big">
+        <br>
+
+        <div ng-if="clickedFriend.status === 'online'" class="inline online-activity-big" title="online"></div>
+        <div ng-if="clickedFriend.status === 'offline'" class="inline offline-activity-big" title="offline"></div>
+
+        <table style="margin-top: 15px; width: 50%">
+            <tr>
+                <td align="left">Friends from: </td>
+                <td align="center">{{ friendsFor() }}</td>
+            </tr>
+            <tr>
+                <td align="left">First Name: </td>
+                <td align="center">{{ clickedFriend.firstName }}</td>
+            </tr>
+            <tr>
+                <td align="left">Last Name: </td>
+                <td align="center">{{ clickedFriend.lastName }}</td>
+            </tr>
+            <tr>
+                <td align="left">Username: </td>
+                <td align="center">{{ clickedFriend.username }}</td>
+            </tr>
+            <tr>
+                <td align="left">Status: </td>
+                <td align="center">{{ clickedFriend.status }}</td>
+            </tr>
+            <tr>
+                <td align="left">Friends: </td>
+                <td align="center">{{ clickedFriend.friends.length }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <br>
+    <div style="top: 10px">
+        <button style="min-width: 100px" class="btn btn-warning" ng-click="cancel()">Close</button>
+    </div>
+</div>
+
+<div class="modal-footer" align="center">
+
+</div>

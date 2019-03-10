@@ -1,0 +1,379 @@
+﻿<div class="app-container">
+    <div class="row toolbar-container">
+        <div class="toolbar">
+            <div class="toolbar-section" align="left">
+                <img src="../resources/images/fp/logo.png" height="50px" width="169px">
+            </div>
+
+            <div class="toolbar-section" align="center" ng-click="changeAvatarModal()">
+                <img src="{{ currentUser.avatar }}" class="avatar cursor"> {{ currentUser.username }}
+            </div>
+
+            <div class="toolbar-section" align="center">
+                <div class="v-center">
+                    <div class="inline" ng-click="findFriendsModal()">
+                        <img src="../resources/images/icons/friends.png" class="image35 cursor">
+                        <div ng-if="currentUser.friendRequestsAwait.length > 0" class="inline cursor"
+                             style="position: absolute; right: -3px; bottom: -3px;">
+                            <span class="badge badge-pill badge-success">{{ currentUser.friendRequestsAwait.length }}</span>
+                        </div>
+                        |
+                    </div>
+                    <img src="../resources/images/icons/settings.png" class="image35 cursor">|
+                    <img src="../resources/images/icons/search.png" class="image35 cursor">|
+                    <img src="../resources/images/icons/help.png" class="image35 cursor" ng-click="faqModal()">|
+                    <img src="../resources/images/icons/logout.png" class="image35 cursor" ng-click="logoutModal()">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row content-container">
+        <div class="col-md-3 col-lg-3 conversation-list-container">
+            <div class="conversation-list">
+                <div ng-repeat="conversation in currentUserPrivateConversations"
+                     class="conversation-container" ng-click="selectConversation(conversation._id)">
+                    <table style="width: 100%; right: 5px;">
+                        <tr>
+                            <td style="width: auto">
+                                <img ng-src="{{ conversation.avatar }}" class="avatar inline">
+                                <div ng-if="conversation.unreadMessages > 0" class="inline cursor"
+                                     style="position: absolute; right: -3px; bottom: -3px;">
+                                    <span class="badge badge-pill badge-success">{{ conversation.unreadMessages }}</span>
+                                </div>
+                            </td>
+                            <td style="width: 65%; padding-left: 10px;">
+                                <div>
+                                    <div>
+                                        {{ conversation.name }}
+                                    </div>
+                                    <div class="last-msg-style trim-text" ng-if="conversation.lastMessage">
+                                        {{ conversation.lastMessage }}
+                                    </div>
+                                </div>
+                            </td>
+                            <td align="right" style="width: 35%;">
+                                <div ng-if="conversation.lastMessageTimestamp" class="trim-text">
+                                    {{ conversation.lastMessageDate }}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div ng-repeat="conversation in currentUserGroupConversations" class="conversation-container"
+                     ng-click="selectConversation(conversation._id)">
+                    <table style="width: 100%; right: 5px;">
+                        <tr>
+                            <td style="width: auto">
+                                <div id="group-convo-avatar">
+                                    <div ng-if="conversation.participants.length === 3">
+                                        <table cellpadding="0" cellspacing="0" style="border-collapse: collapse;" class="multiple-avatars-table">
+                                            <tr style="padding: 0; margin: 0">
+                                                <td rowspan="2" class="multiple-avatars-cell"><img ng-src="{{ currentContextAvatars[conversation.participants[0]] }}" class="inline image5025"></td>
+                                                <td class="multiple-avatars-cell"><img ng-src="{{ currentContextAvatars[conversation.participants[1]] }}" class=" inline image25"></td>
+                                            </tr>
+                                            <tr>
+                                               <td class="multiple-avatars-cell"><img ng-src="{{ currentContextAvatars[conversation.participants[2]] }}" class="inline image25"></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div ng-if="conversation.participants.length >= 4">
+                                        <table cellpadding="0" cellspacing="0" style="border-collapse: collapse;" class="multiple-avatars-table">
+                                            <tr style="padding: 0; margin: 0">
+                                                <td class="multiple-avatars-cell"><img ng-src="{{ currentContextAvatars[conversation.participants[0]] }}" class="inline image25"></td>
+                                                <td class="multiple-avatars-cell"><img ng-src="{{ currentContextAvatars[conversation.participants[1]] }}" class=" inline image25"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="multiple-avatars-cell"><img ng-src="{{ currentContextAvatars[conversation.participants[2]] }}" class="inline image25"></td>
+                                                <td class="multiple-avatars-cell"><img ng-src="{{ currentContextAvatars[conversation.participants[3]] }}" class="inline image25"></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div ng-if="conversation.unreadMessages > 0" class="inline cursor"
+                                     style="position: absolute; right: -3px; bottom: -3px;">
+                                    <span class="badge badge-pill badge-success">{{ conversation.unreadMessages }}</span>
+                                </div>
+                            </td>
+                            <td style="width: 65%; padding-left: 10px;">
+                                <div>
+                                    <div>
+                                        {{ conversation.name }}
+                                    </div>
+                                    <div class="last-msg-style trim-text" ng-if="conversation.lastMessage">
+                                        {{ conversation.lastMessage }}
+                                    </div>
+                                </div>
+                            </td>
+                            <td align="right" style="width: 35%;">
+                                <div ng-if="conversation.lastMessageTimestamp" class="trim-text">
+                                    {{ conversation.lastMessageDate }}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-6 col-lg-6 chat-window-container">
+            <div class="newsfeed-container" ng-if="!activeConversation">
+                <div class="newsfeed-window">
+                    under construction!
+                </div>
+            </div>
+
+            <div class="chat-window" ng-if="activeConversation">
+                <div class="curr-conv-info-container" style="margin: 0 0 5px;">
+                    <div align="center">
+                        {{ activeConversation.name }}
+                    </div>
+                    <div ng-if="!activeConversation.groupConversation">
+                        <div align="center">
+                            <div ng-if="isOffline(activeConversation.otherParticipantID)">Offline</div>
+                            <div ng-if="!isOffline(activeConversation.otherParticipantID)">Online</div>
+                        </div>
+                    </div>
+                    <hr style="margin: 0">
+                </div>
+
+                <!-- The search in conversation part -->
+                <!-- The search in conversation part -->
+                <div ng-show="searchInConversationActive && !searchResultsActive"
+                     style="width: 100%; margin-bottom: 5px">
+                    <div class="form-group row">
+                        <div style="width: 94%">
+                            <input name="src" id="src" placeholder="Type a phrase to search in the conversation..."
+                                   class="form-control"
+                                   ng-model="whatToSearchInConversation.text" ng-enter="searchInConversation()">
+                        </div>
+                        <div style="margin-top: 4px; width: 5%; display: table-cell; vertical-align: middle;"
+                             align="right"
+                             ng-click="triggerSearchInConversation()" class="cursor">Done
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="searchResultsActive" style="width: 100%; margin-bottom: 5px" align="center">
+                    <div class="cursor" style="display: inline-block" ng-click="increaseSearchIndex()">❮</div>
+                    <div class="cursor" style="display: inline-block" ng-click="decreaseSearchIndex()">❯</div>
+                    {{ searchResultIndex + 1}} of {{ highlightedMessages.length }}
+                    results for "{{whatToSearchInConversation.text }}"
+                    <div style="display: inline-block; right: 5px; position: absolute" class="cursor" align="left"
+                         ng-click="closeViewResults()">Done
+                    </div>
+                    <hr style="margin: 0">
+                </div>
+                <!-- The search in conversation part -->
+                <!-- The search in conversation part -->
+
+                <!-- The chat window with the messages -->
+                <!-- The chat window with the messages -->
+                <div class="messages-container" scroll-to-bottom="activeConversation.content" id="messages-container">
+                    <div ng-repeat="message in activeConversation.content">
+                        <div ng-class="message.sender === currentUser._id ? 'message-container-right' : 'message-container-left'">
+                            <img ng-src="{{ currentContextAvatars[message.sender] }}"
+                                 title="{{ currentContextUsernames[message.sender] }}" class="message-avatar">
+                            <div class="message-content" ng-if="message.type !== 4">
+                                <div ng-if="message.type === 0" ng-bind-html="message.content | unsafe"
+                                     id="{{ message._id }}"></div>
+                                <div ng-if="message.type === 1">
+                                    <iframe width="100%" height="100%" ng-src="{{ message.content| trusted}}"
+                                            frameborder="0" allowfullscreen style="border-radius: 10px;"></iframe>
+                                </div>
+                                <div ng-if="message.type === 2">
+                                    <a href="{{ message.content }}" target="_blank">
+                                        <img ng-src="{{ message.content }}" class="img-type-message">
+                                    </a>
+                                </div>
+                                <div ng-if="message.type === 3">
+                                    <a href="{{ message.content }}" target="_blank"
+                                       style="color: white; text-decoration: underline">{{ message.content }}</a>
+                                </div>
+                            </div>
+                            <div ng-if="message.type === 4">
+                                <img src="../resources/images/icons/like.png" class="image50">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- The chat window with the messages -->
+                <!-- The chat window with the messages -->
+
+                <div class="input-container">
+                    <div class="form-group" style="height: 100%; width: 95%; ">
+                            <textarea class="form-control transparent-input" ng-model="activeConversation.nextMessage"
+                                      style="height: 100%; word-break: break-all;"
+                                      placeholder="Enter your message here..."
+                                      ng-enter="activeConversation.nextMessage.length > 0 && sendMessage()"
+                                      ng-change="replaceEmoticon()"
+                                      autocomplete-angular-expression>
+                            </textarea>
+                    </div>
+
+                    <div class="class-actions-container" align="right" style="right: 0">
+                        <!-- The emoticons button -->
+                        <div data-container="body" data-toggle="popover" data-placement="top" id="popover"
+                             onclick="showEmoticonsPanel()">
+                            <div id="popover_content_wrapper" style="display: none">
+                                <div ng-repeat="e in emoticonService.getEmoticons().emoticons"
+                                     class="inline cursor emoji"
+                                     ng-bind-html="e | unsafe" onclick="addEmoticon(this.innerHTML)"
+                                     style="font-size: 20px">
+                                </div>
+                            </div>
+                            <img src="../resources/images/icons/emoticons.png" class="image25 marginr5 cursor"
+                                 id="emoji-button">
+                        </div>
+                        <img src="../resources/images/icons/like.png" class="image25 marginr5 cursor" id="like-button"
+                             ng-click="sendLikeMessage()">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-lg-3 profile-container">
+            <div class="profile">
+                <div id="accordion0" ng-if="activeConversation">
+                    <div class="card" style="border-radius: 15px">
+                        <div class="card-header" id="conv-info" style="border-radius: 15px">
+                            <div data-toggle="collapse" data-target="#collapseZero" aria-expanded="true"
+                                 aria-controls="collapseZero" align="center">
+                                Conversation info & settings
+                            </div>
+                        </div>
+                        <div id="collapseZero" class="collapse show" aria-labelledby="online-friends">
+                            <div class="card-body">
+                                <table width="100%">
+                                    <tr>
+                                        <td style="width: 35%">Text messages:</td>
+                                        <td style="width: 65%"> {{ activeConversation.content.length }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Media messages:</td>
+                                        <td> {{ mediaMessagesCount() }}</td>
+                                    </tr>
+                                    <tr ng-if="activeConversation.groupConversation">
+                                        <td valign="top">Participants:</td>
+                                        <td>
+                                            <div ng-repeat="p in activeConversation.participants">
+                                                <div ng-if="p === currentUser._id">{{ currentContextUsernames[p] }} (you)</div>
+                                                <div ng-if="p !== currentUser._id">{{ currentContextUsernames[p] }}</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <hr>
+                                <div class="cursor" ng-click="triggerSearchInConversation()">
+                                    <img src="../resources/images/icons/search.png" class="image25"> Search in
+                                    conversation
+                                </div>
+                                <div class="cursor" ng-click="createGroupModal(activeConversation.participants)">
+                                    <img src="../resources/images/icons/plus.png" class="image25"> Add friends to
+                                    conversation
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+
+                <div id="accordion">
+                    <div class="card" style="border-radius: 15px">
+                        <div class="card-header" id="online-friends" style="border-radius: 15px">
+                            <div data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                 aria-controls="collapseOne" align="center">
+                                Online friends
+                            </div>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="online-friends">
+                            <div class="card-body">
+                                <div ng-repeat="friend in onlineFriends" class="friend-box justified-flex">
+                                    <div>
+                                        <img ng-src="{{ friend.avatar }}" class="avatar inline">
+                                        <div class="inline">{{ friend.username }}</div>
+                                        <div class="inline online-activity" title="online"></div>
+                                    </div>
+
+                                    <div style="top: 10px" align="right">
+                                        <img src="../resources/images/icons/chat.png" class="image25 cursor"
+                                             ng-click="selectConversationFromUser(friend._id)">
+                                        <img src="../resources/images/icons/search.png" class="image25 cursor"
+                                             ng-click="friendInspectModal(friend)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+
+                <div id="accordion2">
+                    <div class="card" style="border-radius: 15px">
+                        <div class="card-header" id="offline-friends" style="border-radius: 15px">
+                            <div data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
+                                 aria-controls="collapseTwo" align="center">
+                                Offline friends
+                            </div>
+                        </div>
+
+                        <div id="collapseTwo" class="collapse show" aria-labelledby="offline-friends">
+                            <div class="card-body">
+                                <div ng-repeat="friend in offlineFriends" class="friend-box justified-flex">
+                                    <div>
+                                        <img ng-src="{{ friend.avatar }}" class="avatar inline">
+                                        <div class="inline">{{ friend.username }}</div>
+                                        <div class="inline offline-activity" title="online"></div>
+                                    </div>
+
+                                    <div style="top: 10px" align="right">
+                                        <img src="../resources/images/icons/chat.png" class="image25 cursor"
+                                             ng-click="selectConversationFromUser(friend._id)">
+                                        <img src="../resources/images/icons/search.png" class="image25 cursor"
+                                             ng-click="friendInspectModal(friend)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function addEmoticon(emoticon) {
+        scope.addEmoticon(emoticon);
+    }
+
+    function showEmoticonsPanel() {
+        $("[data-toggle=popover]").popover({
+            html: true,
+            content: function () {
+                return $('#popover_content_wrapper').html();
+            }
+        });
+    }
+
+    $(window).on("load", function () {
+        $("[data-toggle=popover]").popover({
+            html: true,
+            content: function () {
+                return $('#popover_content_wrapper').html();
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $('body').on('click', function (e) {
+            const clickedElement = e.target;
+            if (clickedElement.id !== "emoji-button" && clickedElement.className.indexOf("emoji") === -1) {
+                $("#popover").popover('hide');
+            }
+        });
+
+        scope = angular.element(document.getElementById('ng-view')).scope();
+    });
+</script>

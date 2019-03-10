@@ -1,0 +1,40 @@
+<div class="modal-header" align="center">
+    <div align="center" style="width: 100%">
+        Create group conversation
+    </div>
+</div>
+
+<div class="modal-body" align="center">
+    <input type="text" class="form-control" placeholder="Type the group conversation name..." ng-model="groupConversation.name">
+    <div align="center" class="boxes-container">
+        <br>
+        <table>
+            <tr ng-repeat="chunk in currentUserFriends">
+                <td ng-repeat="user in chunk">
+                    <div class="find-friends-box" align="center">
+                        <div class="ff-friend-info">
+                            <img ng-src="{{ user.avatar }}" class="avatar">
+                            <div>{{ user.username }}</div>
+                            <div class="inline {{ user.status}}-activity" title="{{ user.status }}"></div>
+                        </div>
+
+                        <div class="ff-friend-label">
+                            {{ selected = selectedGroupIDS.indexOf(user._id) > -1; ""}}
+                            <div ng-if="selected" class="fr-status-label fr-status-friends cursor" ng-click="unselectUser(user._id)">Selected</div>
+                            <div ng-if="!selected" class="fr-status-label fr-status-pending cursor" ng-click="selectUser(user._id)">Select</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="btn btn-primary" ng-click="createGroupConversation()">
+        Create group with {{ selectedGroupIDS.length }} persons
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

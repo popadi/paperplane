@@ -1,0 +1,54 @@
+<div class="modal-header" align="center">
+    <h3>Customize your avatar</h3>
+</div>
+<div class="modal-body" ng-cloak>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-6" align="center">
+            <h5 style="font-family: 'Open Sans', serif;">Choose from ours</h5>
+            <table>
+                <tr ng-repeat="group in defaultAvatars">
+                    <td ng-repeat="link in group">
+                        <img ng-src="{{ link }}" style="width: 75px; height: 75px" ng-click="selectNewAvatarLink(link)">
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="col-sm-6 col-md-6 col-lg-6" align="center">
+            <div style="height: 100%">
+                <br><br>
+                <img ng-src="{{ newAvatar }}" style="width: 150px; height: 150px; border-radius: 100%;">
+
+                <br><br>
+                <div class="form-group">
+                    <button class="form-control" ng-click="changeAvatar()" style="width: 65%">Use this
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12" align="center">
+            <h5 style="font-family: 'Open Sans', serif;">Or upload your own</h5>
+            <div class="form-group" style="width: 100%; ">
+                <input class="form-control" type="file" ng-model="selectedFile" base-sixty-four-input
+                       ng-change="selectNewAvatarUpload(selectedFile)" style="width: 100%; ">
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-success" ng-if="success">
+        Yay! The avatar was update successfully!
+    </div>
+
+    <div class="alert alert-danger" ng-if="error">
+        Sorry :( There was an error using that image.
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

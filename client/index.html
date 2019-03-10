@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="app">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="icon" href="resources/images/fp/icon.png">
+    <title>Paperplane</title>
+
+    <!-- Bootstrap stuff -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <!-- Angular stuff-->
+    <script src="bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-flow/2.5.1/ng-flow-standalone.min.js"></script>
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300" type="text/css"/>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/loginPageStyle.css">
+    <link rel="stylesheet" href="styles/chatStyle.css">
+</head>
+
+<body ng-class="!globals.currentUser ? 'gradient' : 'simple'">
+{{ frontPageVideo = true; ""}}
+
+<div class="biglogo" align="center" style="z-index: 1000" ng-if="!globals.currentUser">
+    <img src="resources/images/fp/logo.png">
+</div>
+
+<video autoplay muted loop id="myVideo" ng-if="!globals.currentUser && frontPageVideo">
+    <source src="resources/video/fp.mp4" type="video/mp4">
+</video>
+
+<div ng-if="!globals.currentUser && !frontPageVideo">
+    <div class="biglogo" align="center">
+        <img src="resources/images/fp/logo.png">
+    </div>
+
+    <div class="frame">
+        <div class="plane-container">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+            width="1131.53px" height="379.304px" viewBox="0 0 1131.53 379.304" enable-background="new 0 0 1131.53 379.304"
+            xml:space="preserve" class="plane">
+                <polygon fill="#D8D8D8" points="72.008,0 274.113,140.173 274.113,301.804 390.796,221.102 601.682,367.302 1131.53,0.223"></polygon>
+                <polygon fill="#C4C4C3" points="1131.53,0.223 274.113,140.173 274.113,301.804 390.796,221.102"></polygon>
+            </svg>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="clouds" ng-if="!globals.currentUser && !frontPageVideo">
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="762px"
+    height="331px" viewBox="0 0 762 331" enable-background="new 0 0 762 331" xml:space="preserve" class="cloud big front slowest">
+    <path fill="#FFFFFF" d="M715.394,228h-16.595c0.79-5.219,1.201-10.562,1.201-16c0-58.542-47.458-106-106-106
+    c-8.198,0-16.178,0.932-23.841,2.693C548.279,45.434,488.199,0,417.5,0c-84.827,0-154.374,65.401-160.98,148.529
+    C245.15,143.684,232.639,141,219.5,141c-49.667,0-90.381,38.315-94.204,87H46.607C20.866,228,0,251.058,0,279.5
+    S20.866,331,46.607,331h668.787C741.133,331,762,307.942,762,279.5S741.133,228,715.394,228z"></path>
+    </svg>
+
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="762px"
+    height="331px" viewBox="0 0 762 331" enable-background="new 0 0 762 331" xml:space="preserve" class="cloud distant smaller">
+    <path fill="#FFFFFF" d="M715.394,228h-16.595c0.79-5.219,1.201-10.562,1.201-16c0-58.542-47.458-106-106-106
+    c-8.198,0-16.178,0.932-23.841,2.693C548.279,45.434,488.199,0,417.5,0c-84.827,0-154.374,65.401-160.98,148.529
+    C245.15,143.684,232.639,141,219.5,141c-49.667,0-90.381,38.315-94.204,87H46.607C20.866,228,0,251.058,0,279.5
+    S20.866,331,46.607,331h668.787C741.133,331,762,307.942,762,279.5S741.133,228,715.394,228z"></path>
+    </svg>
+
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="762px"
+    height="331px" viewBox="0 0 762 331" enable-background="new 0 0 762 331" xml:space="preserve" class="cloud small slow">
+    <path fill="#FFFFFF" d="M715.394,228h-16.595c0.79-5.219,1.201-10.562,1.201-16c0-58.542-47.458-106-106-106
+    c-8.198,0-16.178,0.932-23.841,2.693C548.279,45.434,488.199,0,417.5,0c-84.827,0-154.374,65.401-160.98,148.529
+    C245.15,143.684,232.639,141,219.5,141c-49.667,0-90.381,38.315-94.204,87H46.607C20.866,228,0,251.058,0,279.5
+    S20.866,331,46.607,331h668.787C741.133,331,762,307.942,762,279.5S741.133,228,715.394,228z"></path>
+    </svg>
+
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="762px"
+    height="331px" viewBox="0 0 762 331" enable-background="new 0 0 762 331" xml:space="preserve" class="cloud distant super-slow massive">
+    <path fill="#FFFFFF" d="M715.394,228h-16.595c0.79-5.219,1.201-10.562,1.201-16c0-58.542-47.458-106-106-106
+    c-8.198,0-16.178,0.932-23.841,2.693C548.279,45.434,488.199,0,417.5,0c-84.827,0-154.374,65.401-160.98,148.529
+    C245.15,143.684,232.639,141,219.5,141c-49.667,0-90.381,38.315-94.204,87H46.607C20.866,228,0,251.058,0,279.5
+    S20.866,331,46.607,331h668.787C741.133,331,762,307.942,762,279.5S741.133,228,715.394,228z"></path>
+    </svg>
+
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="762px"
+    height="331px" viewBox="0 0 762 331" enable-background="new 0 0 762 331" xml:space="preserve" class="cloud slower">
+    <path fill="#FFFFFF" d="M715.394,228h-16.595c0.79-5.219,1.201-10.562,1.201-16c0-58.542-47.458-106-106-106
+    c-8.198,0-16.178,0.932-23.841,2.693C548.279,45.434,488.199,0,417.5,0c-84.827,0-154.374,65.401-160.98,148.529
+    C245.15,143.684,232.639,141,219.5,141c-49.667,0-90.381,38.315-94.204,87H46.607C20.866,228,0,251.058,0,279.5
+    S20.866,331,46.607,331h668.787C741.133,331,762,307.942,762,279.5S741.133,228,715.394,228z"></path>
+    </svg>
+</div>
+
+
+<div ng-view style="width: 100%; height: 100vh;" id="ng-view">
+    <!-- Aici o sa apara contentul -->
+</div>
+
+<!-- Custom controllers/scripts; keep the order -->
+<script src="services/management/authentication.service.js"></script>
+<script src="services/chat/flash.service.js"></script>
+<script src="config/config.service.js"></script>
+
+<!-- Services -->
+<script src="services/management/conversation.service.js"></script>
+<script src="services/management/user.service.js"></script>
+<script src="controllers/home.controller.js"></script>
+<script src="controllers/login.controller.js"></script>
+<script src="controllers/register.controller.js"></script>
+<script src="services/chat/emoticonsService.js"></script>
+<script src="services/chat/regex.service.js"></script>
+<script src="services/utils/utils.service.js"></script>
+
+<!-- Modals -->
+<script src="template/modalAvatar/avatarChangeController.js"></script>
+<script src="template/modalLogout/logoutController.js"></script>
+<script src="template/modalFindFriends/findFriendsController.js"></script>
+<script src="template/friendInspect/friendInspect.js"></script>
+<script src="template/faq/faqController.js"></script>
+<script src="template/createGroup/createGroupController.js"></script>
+
+<!-- Directives -->
+<script src="directives/ngEnter.js"></script>
+<script src="directives/scrollBottom.js"></script>
+
+<!-- Filters -->
+<script src="filters/unsafe.js"></script>
+<script src="filters/trusted.js"></script>
+
+<script type="text/javascript">
+    function addEmoticon(emoticon) {
+        scope.addEmoticon(emoticon);
+    }
+
+    $('body').on('click', function (e) {
+        const clickedElement = e.target;
+        if (clickedElement.id !== "emoji-button" && clickedElement.className.indexOf("emoji") === -1) {
+            $("#popover").popover('hide');
+        }
+    });
+
+    $(document).ready(function () {
+        scope = angular.element(document.getElementById('ng-view')).scope();
+        console.log("scopeeee");
+
+        $("[data-toggle=popover]").popover({
+            html: true,
+            content: function () {
+                return $('#popover_content_wrapper').html();
+            }
+        });
+    });
+
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+</script>
+</body>
+</html>

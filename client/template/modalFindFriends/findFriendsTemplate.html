@@ -1,0 +1,97 @@
+<div class="modal-header" align="center">
+    <div align="center">
+        Friends manager
+    </div>
+</div>
+
+<div class="modal-body" align="center">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#fr" onclick="(function(e){e.preventDefault();})(event)">Friend
+                requests</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#ff" onclick="(function(e){e.preventDefault();})(event)">Find
+                friends</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div id="fr" class="container tab-pane active boxes-container"><br>
+            <div ng-if="friendRequests.length === 0">
+                You don't have any new friend requests. Check a bit later.
+            </div>
+
+            <br>
+            <table>
+                <tr ng-repeat="chunk in friendRequests">
+                    <td ng-repeat="req in chunk">
+                        <div class="find-friends-box" align="center">
+                            <div class="ff-friend-info">
+                                <img ng-src="{{ req.avatar }}" class="avatar">
+                                <div>{{ req.username }}</div>
+                                <div class="inline {{ req.status}}-activity" title="{{ req.status }}"></div>
+                            </div>
+
+                            <div class="ff-friend-label">
+                                <div class="fr-status-label-half-left fr-status-yes inline cursor"
+                                     ng-click="sendRequestAnswer(req._id, true)">Yes
+                                </div>
+                                <div class="fr-status-label-half-right fr-status-no inline cursor"
+                                     ng-click="sendRequestAnswer(req._id, false)">No
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="ff" class="container tab-pane fade">
+            <div align="center" class="boxes-container">
+                <br>
+                <table>
+                    <tr ng-repeat="chunk in allUsersChunks">
+                        <td ng-repeat="user in chunk">
+                            <div class="find-friends-box" align="center">
+                                <div class="ff-friend-info">
+                                    <img ng-src="{{ user.avatar }}" class="avatar">
+                                    <div>{{ user.username }}</div>
+                                    <div class="inline {{ user.status}}-activity" title="{{ user.status }}"></div>
+                                </div>
+
+                                <div class="ff-friend-label">
+                                    {{ isActuallyYou = currentUser.username === user.username; ""}}
+                                    {{ youAreFriends = alreadyFriendsWith(user._id); ""}}
+                                    {{ isPending = currentUser.friendRequestsSent.indexOf(user._id) > -1; ""}}
+                                    {{ isReceived = currentUser.friendRequestsAwait.indexOf(user._id) > -1; ""}}
+
+                                    <div ng-if="isActuallyYou" class="fr-status-label fr-status-you">You</div>
+                                    <div ng-if="youAreFriends" class="fr-status-label fr-status-friends">Friends</div>
+                                    <div ng-if="!youAreFriends && !isPending && !isReceived && !isActuallyYou"
+                                         class="fr-status-label fr-status-send cursor"
+                                         ng-click="sendFriendRequest(user._id)">Send request
+                                    </div>
+                                    <div ng-if="isPending" class="fr-status-label fr-status-pending">Pending...</div>
+                                    <div ng-if="isReceived" class="fr-status-label fr-status-received">Received</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <div style="top: 10px">
+        <button style="min-width: 100px" class="btn btn-primary" ng-click="ok()">Done</button>
+        <button style="min-width: 100px" class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</div>
+
+<div class="modal-footer" align="center">
+
+</div>

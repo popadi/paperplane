@@ -1,0 +1,508 @@
+.simple {
+    background-image: url("http://www.exocomics.com/comics/desktop/14_250/EXO250_1920_1080.jpg");
+    background-size: cover;
+}
+
+.row {
+    margin: 0;
+    padding: 0
+}
+
+.app-container {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.toolbar-container {
+    padding: 5px;
+    width: 100%;
+}
+
+.toolbar {
+    height: 100%;
+    width: 100%;
+
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 5px;
+
+    justify-content: space-between;
+    display: flex;
+}
+
+.toolbar-section {
+
+}
+
+.content-container {
+    height: calc(100% - 75px);
+    width: 100%;
+}
+
+.conversation-list-container {
+    padding: 5px;
+    height: 100%;
+}
+
+.conversation-list {
+    height: 100%;
+    width: 100%;
+
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 5px;
+}
+
+.chat-window-container {
+    height: 100%;
+    padding: 5px;
+}
+
+.chat-window {
+    height: 100%;
+    width: 100%;
+
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 5px;
+}
+
+.newsfeed-container {
+    overflow: auto;
+    height: 100%;
+}
+
+.newsfeed-window {
+    height: 100%;
+    width: 100%;
+
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 5px;
+}
+
+.curr-conv-info-container {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.messages-container {
+    padding-bottom: 10px;
+    overflow: auto;
+    height: 85%;
+}
+
+.messages-container::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+.messages-container::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #e7ae5f;
+}
+
+.input-container {
+    border-top: gray 1px solid;
+    width: 100%;
+    height: 10%;
+}
+
+.message-container-left {
+    margin-top: 5px;
+    display: flex;
+}
+
+.message-container-right {
+    margin-top: 5px;
+    flex-direction: row-reverse;
+    display: flex;
+}
+
+.message-avatar {
+    display: inline-block;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.message-content {
+    display: inline-block;
+    word-break: break-all;
+    overflow: auto;
+    max-width: 60%;
+    width: auto;
+    height: auto;
+
+    background-color: #23A6D5;
+    border-radius: 15px;
+    padding: 5px;
+}
+
+.message-content-searched {
+    display: inline-block;
+    word-break: break-all;
+    overflow: auto;
+    max-width: 60%;
+    width: auto;
+    height: auto;
+
+    background-color: #e7892a;
+    border-radius: 15px;
+    padding: 5px;
+}
+
+.img-type-message {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+input, textarea, textarea:focus, input:focus {
+    border: none transparent;
+    outline: none;
+}
+
+textarea.transparent-input {
+    background-color: rgba(0, 0, 0, 0) !important;
+    border: none !important;
+}
+
+textarea {
+    overflow: auto;
+    resize: none;
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+.profile-container {
+    border-radius: 15px;
+    height: 100%;
+    padding: 5px;
+}
+
+.profile {
+    height: 100%;
+    width: 100%;
+
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 5px;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+
+    border: 1px solid black;
+    border-radius: 100%;
+}
+
+.avatar-big {
+    width: 50%;
+    height: 50%;
+
+    border: 1px solid black;
+    border-radius: 100%;
+}
+
+.multiple-avatars-table {
+    border-radius: 100%;
+    overflow: hidden;
+
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0;
+    padding: 0
+}
+
+.multiple-avatars-cell {
+    max-height: 25px;
+    max-width: 25px;
+    padding: 0;
+    margin: 0;
+}
+
+.fade.in {
+    opacity: 1;
+}
+
+.modal.in .modal-dialog {
+    top: 0;
+    -webkit-transform: translate(0, 25%);
+    -o-transform: translate(0, 25%);
+    transform: translate(0, 25%);
+    left: 0;
+}
+
+.modal-backdrop.in {
+    opacity: 0.3;
+}
+
+/****************************************************************/
+/*            Pentru prietenii si chestiile din stanga          */
+/****************************************************************/
+.card-body {
+    padding: 10px;
+}
+
+.friend-box {
+    margin-bottom: 5px;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.justified-flex {
+    justify-content: space-between;
+    display: flex;
+}
+
+.trim-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.v-center {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.image12 {
+    width: 20px;
+    height: 20px;
+}
+
+.image25 {
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    margin: 0;
+}
+
+.image5025 {
+    height: 50px;
+    width: 25px;
+}
+
+.image35 {
+    width: 35px;
+    height: 35px;
+}
+
+.image50 {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    margin: 0;
+}
+
+.marginr5 {
+    margin-right: 5px
+}
+
+.online-activity {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: #4ba81a;
+}
+
+.online-activity-big {
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    background-color: #4ba81a;
+}
+
+.offline-activity {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: #a5a8a8;
+}
+
+.offline-activity-big {
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    background-color: #a5a8a8;
+}
+
+.away-activity {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: #cdb328;
+}
+
+.busy-activity {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background-color: #b91319;
+}
+
+/****************************************************************/
+/*               Pentru atunci cand cautam prieteni             */
+/****************************************************************/
+.find-friends-box {
+    height: 135px;
+    width: 110px;
+    border: 1px solid gray;
+    border-radius: 15px;
+    margin: 0px 2px 5px;
+}
+
+.ff-friend-info {
+    border-bottom: 1px solid gray;
+    padding: 5px;
+    height: 80%;
+}
+
+.ff-friend-label {
+    width: 100%;
+    height: 20%;
+}
+
+.fr-status-label {
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    -webkit-border-bottom-right-radius: 15px;
+    -webkit-border-bottom-left-radius: 15px;
+
+    color: white;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+}
+
+.fr-status-label-half-left {
+    -webkit-border-bottom-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+
+    color: white;
+    position: absolute;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    bottom: 0;
+}
+
+.fr-status-label-half-right {
+    -webkit-border-bottom-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+
+    color: white;
+    position: absolute;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    bottom: 0;
+}
+
+.fr-status-label.fr-status-friends {
+    background-color: #00b400;
+}
+
+.fr-status-label.fr-status-send {
+    background-color: #d1c8c3;
+}
+
+.fr-status-label.fr-status-you {
+    background-color: #23A6D5;
+}
+
+.fr-status-label.fr-status-pending {
+    background-color: #D1AB36;
+}
+
+.fr-status-label.fr-status-received {
+    background-color: #D1AB36;
+}
+
+.fr-status-label-half-left.fr-status-yes {
+    background-color: #00b400;
+}
+
+.fr-status-label-half-right.fr-status-no {
+    background-color: #d12721;
+}
+
+.boxes-container {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.boxes-container::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+.boxes-container::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+.boxes-container::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #e7ae5f;
+}
+
+/****************************************************************/
+/*               Pentru emoticoane si alte actiuni              */
+/****************************************************************/
+.class-actions-container {
+    position: absolute;
+    z-index: 1111;
+    right: 5px;
+    top: 5px;
+    display: flex;
+}
+
+/****************************************************************/
+/*              Pentru lista de conversatii din stanga          */
+/****************************************************************/
+.conversation-container {
+    width: 100%;
+    padding: 5px;
+
+    border-radius: 15px;
+    margin-bottom: 5px;
+    background-color: white;
+    border: 1px solid lightgray;
+}
+
+.last-msg-style {
+    color: #c5c5c5;
+}

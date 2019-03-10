@@ -1,0 +1,323 @@
+﻿#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.gradient {
+    overflow: hidden;
+    width: 100wh;
+    height: 90vh;
+    color: #fff;
+    background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+    background-size: 400% 400%;
+    -webkit-animation: Gradient 15s ease infinite;
+    -moz-animation: Gradient 15s ease infinite;
+    animation: Gradient 15s ease infinite;
+}
+
+@-webkit-keyframes Gradient {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@-moz-keyframes Gradient {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@keyframes Gradient {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+h1,
+h6 {
+    font-family: 'Open Sans';
+    font-weight: 300;
+    text-align: center;
+    position: absolute;
+    top: 45%;
+    right: 0;
+    left: 0;
+}
+
+* {
+    position: relative;
+}
+
+.frame {
+    width: 500px;
+    height: auto;
+    margin: 15% auto 0;
+    position: absolute;
+    width: 100%;
+}
+
+svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.plane-container {
+    top: -125px;
+    width: 200px;
+    margin: 0px auto;
+    z-index: 3;
+}
+
+.plane {
+    width: 100%;
+    height: 60px;
+}
+
+.plane-container {
+    -webkit-animation: paper-plane-scoping 2s alternate infinite;
+    -moz-animation: paper-plane-scoping 2s alternate infinite;
+    animation: paper-plane-scoping 2s alternate infinite;
+
+    -webkit-animation-timing-function: linear;
+    -moz-animation-timing-function: linear;
+    animation-timing-function: linear;
+}
+
+@-webkit-keyframes paper-plane-scoping {
+    0% {
+        -webkit-transform: translateY(0px);
+        -moz-transform: translateY(0px);
+        transform: translateY(0px);
+    }
+    100% {
+        -webkit-transform: translateY(100px);
+        -moz-transform: translateY(100px);
+        transform: translateY(100px);
+    }
+}
+
+.plane {
+    -webkit-animation-timing-function: ease-in-out;
+    -moz-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+
+    -webkit-animation: paper-plane-soaring 4s forwards infinite;
+    -moz-animation: paper-plane-soaring 4s forwards infinite;
+    animation: paper-plane-soaring 4s forwards infinite;
+}
+@-webkit-keyframes paper-plane-soaring {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    40% {
+        -webkit-transform: rotate(15deg);
+        -moz-transform: rotate(15deg);
+        transform: rotate(15deg);
+    }
+    50% {
+        -webkit-transform: rotate(15deg);
+        -moz-transform: rotate(15deg);
+        transform: rotate(15deg);
+    }
+    60% {
+        -webkit-transform: rotate(-10deg);
+        -moz-transform: rotate(-10deg);
+        transform: rotate(-10deg);
+    }
+    70% {
+        -webkit-transform: rotate(-10deg);
+        -moz-transform: rotate(-10deg);
+        transform: rotate(-10deg);
+    }
+    100% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+}
+
+.clouds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    transform: translateZ(0);
+}
+
+.cloud {
+    position: absolute;
+    top: 20%;
+    width: 300px;
+    right: 0;
+    opacity: 1;
+}
+
+.cloud.front {
+    z-index: 9;
+}
+
+.cloud.distant {
+    z-index: 1;
+}
+
+.cloud.background {
+    z-index: 1;
+}
+
+.cloud.smaller {
+    margin-right: 400px;
+    width: 100px;
+    margin-top: 50px;
+}
+
+.cloud.small {
+    margin-right: 200px;
+    width: 150px;
+}
+
+.cloud.big {
+    width: 500px;
+    margin-top: 50px;
+    margin-right: 150px;
+}
+
+.cloud.massive {
+    width: 600px;
+    margin-top: 20px;
+    margin-right: 0px;
+}
+
+.cloud {
+    -webkit-animation-name: cloud-movement;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-direction: forwards;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-duration: 8s;
+
+    -moz-animation-name: cloud-movement;
+    -moz-animation-timing-function: linear;
+    -moz-animation-direction: forwards;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-duration: 8s;
+
+    animation-name: cloud-movement;
+    animation-timing-function: linear;
+    animation-direction: forwards;
+    animation-iteration-count: infinite;
+    animation-duration: 8s;
+}
+
+.slow {
+    -webkit-animation-duration: 9.2s;
+    -moz-animation-duration: 9.2s;
+    animation-duration: 9.2s;
+}
+
+.slower {
+    -webkit-animation-duration: 11.2s;
+    -moz-animation-duration: 11.2s;
+    animation-duration: 11.2s;
+}
+
+.slowest {
+    -webkit-animation-duration: 13.5s;
+    -moz-animation-duration: 13.5s;
+    animation-duration: 13.5s;
+}
+
+.super-slow {
+    -webkit-animation-duration: 20.5s;
+    -moz-animation-duration: 20.5s;
+    animation-duration: 20.5s;
+}
+
+@-webkit-keyframes cloud-movement {
+    0% {
+        opacity: 0.1;
+        -webkit-transform: translateX(300px);
+        -moz-transform: translateX(300px);
+        transform: translateX(300px);
+    }
+    10% {
+
+        opacity: 0.7;
+    }
+    90% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: translateX(-1000px);
+        -moz-transform: translateX(-1000px);
+        transform: translateX(-1000px);
+    }
+}
+
+.loginform {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    border-radius: 15px;
+    top: 50%;
+
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    color: black;
+    font-family: "Open Sans", serif;
+}
+
+.registerform {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    border-radius: 15px;
+    top: 50%;
+
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    color: black;
+    font-family: "Open Sans", serif;
+}
+
+.biglogo {
+    position: absolute;
+    width: 100%;
+}
+
+.logo {
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    transform: translateY(-50%);
+    margin-bottom: -45px;
+
+    width: 100%;
+    height: 75px;
+}
